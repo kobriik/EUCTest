@@ -1,7 +1,6 @@
 ﻿using EUCTest.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Localization;
 
 namespace EUCTest.Controllers
 {
@@ -11,7 +10,7 @@ namespace EUCTest.Controllers
     {
         private readonly EucDatabaseContext _db;
 
-        public ValuesController(ILogger<HomeController> logger, EucDatabaseContext db, IStringLocalizerFactory factory)
+        public ValuesController(EucDatabaseContext db)
         {
             _db = db;
         }
