@@ -27,7 +27,7 @@ namespace EUCTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(PersonVm personVm)
+        public IActionResult Index(PersonVm personVm)
         {
             if (!ModelState.IsValid)
             {
