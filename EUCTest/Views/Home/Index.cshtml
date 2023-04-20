@@ -1,0 +1,97 @@
+﻿@using EUCTest.Enums;
+@using EUCTest.ViewModels;
+@using System.Globalization;
+@model PersonVm;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section scripts{ 
+
+<script type="text/javascript">
+    $(function () {
+        $('#txtDate').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            startDate: new Date('1900'),
+            format: "dd.mm.yyyy",
+            language: "@(CultureInfo.CurrentCulture.TwoLetterISOLanguageName)"
+        });
+    });
+</script>
+}
+
+<h1 style="text-align:center">@ViewBag.EntryForm</h1>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Index" class="g-3 needs-validation" asp-route-culture=@ViewData["culture"]>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group rowItem">
+                        <label asp-for="FirstName" class="lable-control"></label>
+                        <input asp-for="FirstName" class="form-control" placeholder="Tomas"/>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group rowItem">
+                        <label asp-for="LastName" class="lable-control"></label>
+                        <input asp-for="LastName" class="form-control" placeholder="Kobr"/>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group rowItem">
+                        <label asp-for="IdentityNumber" class="lable-control"></label>
+                        <input asp-for="IdentityNumber" class="form-control" id="IdentityNumber" placeholder="123456/7890"/>
+                        <span asp-validation-for="IdentityNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group date rowItem" id="datepicker">
+
+                        <label asp-for="Birthdate" class="lable-control"></label>
+                        <div class="input-group">
+                            <input type="text" asp-for="Birthdate" id="txtDate" class="form-control comboCalendarInput" autocomplete="off" />
+                            <span class="input-group-append">
+                                <div class="input-group-text bg-transparent comboCalendarGlyph"><i class="bi bi-calendar"></i></div>
+                            </span>
+                        </div>
+                        <span asp-validation-for="Birthdate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group rowItem">
+                        <label asp-for="SexId" class="lable-control"></label>
+                        <select asp-for="SexId" class="form-select" asp-items="@ViewBag.SexList">
+                        </select>
+                    </div>
+
+                    <div class="form-group rowItem">
+                        <label asp-for="Email" class="lable-control"></label>
+                        <input type="text" asp-for="Email" class="form-control" placeholder="kobrtomas@seznam.cz" >
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group rowItem">
+                        <label asp-for="CountryId" class="lable-control"></label>
+                        <select asp-for="CountryId" class="form-select" asp-items="@ViewBag.CountryList">
+                        </select>
+                    </div>
+
+                    <div class="form-group rowItem">
+                        <span>
+                            <label asp-for="GdprAgree" class="lable-control"></label>
+                            <input class="form-check-input" type="checkbox" asp-for="GdprAgree">
+                            <a href="https://www.seznam.cz/" target="_blank" style="margin-left:10px">PDF</a>
+                            <span asp-validation-for="GdprAgree" class="text-danger" style="display:block"></span>
+                        </span>
+                    </div>
+
+                   <div class="form-group">
+                          <button type="submit" class="btn btn-primary rounded-0 mt-2" style="width:100%" >@ViewBag.Send</button>
+                   </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
